@@ -9,11 +9,17 @@ class OilPaint {
     this.newtime = new Date() * 0.001;
     this.deltime = 0.0;
 
-    this.camera = new THREE.Camera();
+    // this.camera = new THREE.Camera();
+    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    this.camera.position.z = 10.0;
     this.canvas = new OilCanvas();
-    this.brush = new OilBrush();
-
-    this.canvas.add(this.brush);
+    // this.brush = new OilBrush();
+    this.tl = new THREE.TextureLoader();
+    this.tl.load("img/Marry.jpg", (img) => {
+      img.minFilter = THREE.LinearFilter;
+      img.magFilter = THREE.LinearFilter;
+      for(var cnt = 0; cnt < 50; cnt++) this.canvas.add(new OilBrush(img));
+    })
   }
 
   update() {
