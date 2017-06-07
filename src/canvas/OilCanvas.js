@@ -1,8 +1,10 @@
 import THREE from 'n3d-threejs'
 
 class OilCanvas extends THREE.Scene {
-  constructor() {
+  constructor(rdrr) {
     super();
+
+    this.rdrr = rdrr;
 
     this.tex = new THREE.WebGLRenderTarget(
       window.innerWidth, window.innerHeight, {
@@ -11,11 +13,16 @@ class OilCanvas extends THREE.Scene {
     });
 
     this.scene = new THREE.Scene();
-    this.camera = new THREE.Camera();
-    this.scene.add(new THREE.Mesh(
+
+    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    this.camera.position.z = 15.0
+
+    this.object = new THREE.Object3D();
+    this.object.add(new THREE.Mesh(
       new THREE.PlaneGeometry(2.0, 2.0),
       new THREE.MeshBasicMaterial({ map : this.tex })
-    ))
+    ));
+    this.scene.add(this.object);
   }
 
   update(dt) {
@@ -24,12 +31,10 @@ class OilCanvas extends THREE.Scene {
     });
   }
 
-  render(rdrr, camera) {
-    rdrr.autoClear = false;
-    rdrr.render(this, camera, this.tex);
-    rdrr.autoClear = true;
-    rdrr.render(this.scene, this.camera);
-
+  render() {
+    this.rdrr.autoClear = false;
+    this.rdrr.render(this, this.camera, this.tex);
+    this.rdrr.autoClear = true;
   }
 
   get texture() { return this.tex; }
