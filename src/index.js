@@ -1,4 +1,4 @@
-import THREE from "n3d-threejs"
+import * as THREE from 'three'
 import OilPaint from "./oilpaint.js"
 
 var renderer = undefined;

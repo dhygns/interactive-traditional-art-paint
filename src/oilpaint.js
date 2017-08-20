@@ -1,4 +1,4 @@
-import THREE from 'n3d-threejs'
+import * as THREE from 'three'
 import OilCanvas from './canvas/OilCanvas.js'
 import OilBrush from './brush/OilBrush.js'
 import ShadowCanvas from './blur/Blurring.js'

@@ -4,9 +4,8 @@
   "description": "optical flow for THREEjs",
   "main": "app.js",
   "scripts": {
-    "start" : "node app.js",
-    "build" : "webpack --watch ./src/index.js ./build/index.bundle.js",
-    "debug": "concurrently \"npm run build\" \"npm run start\""
+    "start": "node app.js",
+    "build": "webpack --watch ./src/index.js ./build/index.bundle.js"
   },
   "repository": {
     "type": "git",
@@ -27,8 +26,8 @@
     "n3d-threejs": "^76.0.0"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.24.1",
-    "concurrently": "^3.4.0",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "three": "^0.87.1",
+    "webpack": "^3.5.5"
   }
 }

@@ -1,4 +1,4 @@
-import THREE from 'n3d-threejs'
+import * as THREE from 'three'
 
 class OilCanvas extends THREE.Scene {
   constructor(rdrr) {

@@ -1,4 +1,4 @@
-import THREE from 'n3d-threejs'
+import * as THREE from 'three'
 
 class Blurring {
   constructor(rdrr) {

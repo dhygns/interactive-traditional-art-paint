@@ -1,4 +1,4 @@
-import THREE from 'n3d-threejs'
+import * as THREE from 'three'
 import Fur from './OilBrushFur.js'
 
 class OilBrush extends THREE.Object3D {
