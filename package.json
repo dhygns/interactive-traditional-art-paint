@@ -1,33 +1,34 @@
 {
-  "name": "n3d-optflow",
+  "name": "experiments",
   "version": "1.0.0",
-  "description": "optical flow for THREEjs",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "build": "webpack --watch ./src/index.js ./build/index.bundle.js"
+    "start": "watchify ./src/index.js -v -t babelify -d -o ./build/index.bundle.js | live-server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dhygns/n3d-optFlow.git"
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
   },
-  "keywords": [
-    "threejs",
-    "n3d-threejs",
-    "opticalFlow"
-  ],
-  "author": "donghyeon kim",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dhygns/n3d-optFlow/issues"
-  },
-  "homepage": "https://github.com/dhygns/n3d-optFlow#readme",
-  "dependencies": {
-    "n3d-threejs": "^76.0.0"
-  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "express": "^4.15.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "live-server": "^1.2.0",
     "three": "^0.87.1",
-    "webpack": "^3.5.5"
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "socket.io-client": "^2.0.3"
   }
 }

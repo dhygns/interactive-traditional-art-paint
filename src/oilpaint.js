@@ -18,29 +18,30 @@ class OilPaint {
 
 
     // this.brush = new OilBrush();
-    this.tl = new THREE.TextureLoader();
-    this.tl.load("img/Paris.jpg", (img) => {
-      img.minFilter = THREE.LinearFilter;
-      img.magFilter = THREE.LinearFilter;
+    this.tl = new THREE.TextureLoader();        
+    this.tl.crossOrigin = '';
+    
 
+    {
       this.oilpaint = new OilCanvas(this.rdrr);
       this.oilpaint_canvas = new THREE.Object3D();
       this.oilpaint_canvas.add(new THREE.Mesh(
         new THREE.PlaneGeometry(2.0, 2.0),
-        new THREE.MeshBasicMaterial({transparent : true, map : this.oilpaint.texture})
+        new THREE.MeshBasicMaterial({ transparent: true, map: this.oilpaint.texture })
       ));
+
       this.scene.add(this.oilpaint_canvas);
 
-      for(var cnt = 0; cnt < 50; cnt++) this.oilpaint.add(new OilBrush(img));
+      for (var cnt = 0; cnt < 100; cnt++) this.oilpaint.add(new OilBrush());
 
       this.shadow = new ShadowCanvas(this.rdrr);
       this.shadow_canvas = new THREE.Object3D();
       this.shadow_canvas.add(new THREE.Mesh(
         new THREE.PlaneGeometry(2.0, 2.0),
         new THREE.ShaderMaterial({
-          transparent : true,
-          uniforms : { unif_texture : { type : "t", value : this.shadow.texture}},
-          fragmentShader : `
+          transparent: true,
+          uniforms: { unif_texture: { type: "t", value: this.shadow.texture } },
+          fragmentShader: `
           uniform sampler2D unif_texture;
           varying vec2 vtex;
 
@@ -50,7 +51,7 @@ class OilPaint {
             gl_FragColor = vec4(0.0, 0.0, 0.0, retcol.a * 0.5);
           }
           `,
-          vertexShader : `
+          vertexShader: `
           varying vec2 vtex;
           void main(void) {
             vtex = uv;
@@ -64,10 +65,10 @@ class OilPaint {
 
       this.oilpaint_canvas.position.z = -0.001;
       this.shadow_canvas.position.z = 0.000;
-      this.shadow_canvas.position.y =-0.300;
+      this.shadow_canvas.position.y = -0.300;
 
 
-    })
+    }
   }
 
   update() {
@@ -75,19 +76,28 @@ class OilPaint {
     this.deltime = this.newtime - this.oldtime;
     this.oldtime = new Date() * 0.001;
 
-    if(this.deltime < 0.0 || this.deltime > 0.1) this.deltime = 0.0;
+    if (this.deltime < 0.0 || this.deltime > 0.1) this.deltime = 0.0;
 
     // console.log(this.canvas)
-    if(this.oilpaint) this.oilpaint.update(this.deltime);
-    if(this.shadow) this.oilpaint.update(this.deltime);
+    if (this.oilpaint) this.oilpaint.update(this.newtime, this.deltime);
+    // if(this.shadow) this.oilpaint.update(this.newtime, this.deltime);
 
   }
 
   render() {
-    if(this.oilpaint) this.oilpaint.render();
-    if(this.shadow) this.shadow.render(this.oilpaint.texture, 10);
+    if (this.oilpaint) this.oilpaint.render();
+    if (this.shadow) this.shadow.render(this.oilpaint.texture, 10);
     this.rdrr.render(this.scene, this.camera);
     // console.log(this.canvas.texture);
+  }
+
+  loadTexture(url) {
+    this.tl.load(url, (img) => {
+      img.minFilter = THREE.LinearFilter;
+      img.magFilter = THREE.LinearFilter;
+
+      this.oilpaint.start(new Date() * 0.001, img);
+    });
   }
 }
 

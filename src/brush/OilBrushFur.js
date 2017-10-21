@@ -1,11 +1,11 @@
 import * as THREE from 'three'
 
 class OilBrushFur extends THREE.Object3D {
-  constructor(texture) {
+  constructor() {
     super();
 
     this.uniforms = {
-      unif_texture : { type : "t", value : texture},
+      unif_texture : { type : "t", value : undefined},
       unif_texcoord : { type : "2f", value : [0.0, 0.0]},
       unif_seed : { type : "1f", value : 0.9 + 0.1 * Math.random()}
     };
@@ -76,6 +76,8 @@ class OilBrushFur extends THREE.Object3D {
 
     this.scale.y = this.scale.x += (this.scale.now - this.scale.x) * 1.0 * dt;
   }
+
+  set texture(tex) { this.uniforms.unif_texture.value = tex; }
 }
 
 export default OilBrushFur

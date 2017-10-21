@@ -25,9 +25,18 @@ class OilCanvas extends THREE.Scene {
     this.scene.add(this.object);
   }
 
-  update(dt) {
+  start(t, tex) {
     this.children.forEach((object) => {
-      if(object.update) object.update(dt);
+      if(object.init) {
+        object.init(t);
+        object.texture = tex;
+      }
+    });
+  }
+
+  update(t, dt) {
+    this.children.forEach((object) => {
+      if(object.update) object.update(t, dt);
     });
   }
 
