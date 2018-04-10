@@ -15,12 +15,12 @@ class OilBrush extends THREE.Object3D {
 
   start(t) {
     const et = t - this.time;
-    const rt = Math.max(0.0, 10.0 - et * 0.2);
+    const rt = Math.max(0.1, 3.0 - et * 0.2);
 
     const d = Math.random() * Math.random() * 20.0;
     const r = Math.random() * Math.PI * 2.0;
     const x = Math.random() * 14.0 - 7.0;//d * Math.sin(r);
-    const y = Math.random() * 14.0 - 7.0;//d * Math.cos(r);
+    const y = Math.random() * 5.0 - 2.5;//d * Math.cos(r);
     this.position.x = x;
     this.position.y = y;
 
@@ -30,7 +30,7 @@ class OilBrush extends THREE.Object3D {
     this.scale.x = 0.2 + sed * 0.25;
     this.scale.y = 0.2 + sed * 0.25;
     
-    this.lifetime = 0.1 + sed * 3.0 ;
+    this.lifetime = 0.1 + sed * 1.0 ;
 
     this.radian.value = this._random();
     this.radian.velocity = this._random() * 0.2;
@@ -38,7 +38,7 @@ class OilBrush extends THREE.Object3D {
     this.radian.speed = 0.01 + Math.random() * 0.01;
 
     this.children.forEach((obj) => {
-      if(obj.start) obj.start(this.position.x / 14.0 + 0.5, this.position.y / 14.0 + 0.5);
+      if(obj.start) obj.start(this.position.x / 14.0 + 0.5, this.position.y / 5.0 + 0.5);
     });
   }
 

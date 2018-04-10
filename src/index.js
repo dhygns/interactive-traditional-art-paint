@@ -10,7 +10,7 @@ var setup = function () {
   document.body.appendChild(renderer.domElement);
 
   oilpaint = new OilPaint(renderer);
-  oilpaint.loadTexture("img/profile.png");
+  oilpaint.loadTexture("img/name.png");
   // document.addEventListener("keydown", ({ key }) => {
   //   console.log(key);
   //   switch (key) {
