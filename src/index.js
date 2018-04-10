@@ -10,16 +10,16 @@ var setup = function () {
   document.body.appendChild(renderer.domElement);
 
   oilpaint = new OilPaint(renderer);
-
-  document.addEventListener("keydown", ({ key }) => {
-    console.log(key);
-    switch (key) {
-      case "1":
-        oilpaint.loadTexture("img/Paris.jpg"); break;
-      case "2":
-        oilpaint.loadTexture("img/Houses.jpg"); break;
-    }
-  })
+  oilpaint.loadTexture("img/profile.png");
+  // document.addEventListener("keydown", ({ key }) => {
+  //   console.log(key);
+  //   switch (key) {
+  //     case "1":
+  //       oilpaint.loadTexture("img/profile.png"); break;
+  //     case "2":
+  //       oilpaint.loadTexture("img/Houses.jpg"); break;
+  //   }
+  // })
 }
 
 var update = function () {
